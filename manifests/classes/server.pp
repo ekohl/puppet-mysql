@@ -50,9 +50,17 @@ class mysql::server {
     require => Package["mysql-server"],
   }
 
+  file { "/usr/share/augeas/lenses/contrib/":
+    ensure => directory,
+    owner => 'root',
+    group => 'root',
+    mode => 0755,
+  }
+
   file { "/usr/share/augeas/lenses/contrib/mysql.aug":
     ensure => present,
     source => "puppet:///mysql/mysql.aug",
+    require => File["/usr/share/augeas/lenses/contrib/"],
   }
 
   augeas { "my.cnf/mysqld":
