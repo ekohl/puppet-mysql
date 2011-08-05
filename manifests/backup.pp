@@ -1,17 +1,14 @@
-/*
-== Class: mysql::backup
-
-Enable mysql daily backup script.
-
-The script /usr/local/bin/mysql-backup.sh will be run every night. It runs
-mysqldump --all-databases. Backups will be stored in /var/backups/mysql.
-
-Attributes:
-- $mysqldump_retention: defines if backup rotate on a weekly, monthly or yearly
-  basis. Accepted values: "week", "month", "year". Defaults to "week".
-$subversion_backupdir = "/var/backups/subversion"
-
-*/
+# == Class: mysql::backup
+#
+# Enable mysql daily backup script.
+#
+# The script /usr/local/bin/mysql-backup.sh will be run every night. It runs
+# mysqldump --all-databases. Backups will be stored in /var/backups/mysql.
+#
+# Attributes:
+# - $mysqldump_retention: defines if backup rotate on a weekly, monthly or yearly
+#   basis. Accepted values: "week", "month", "year". Defaults to "week".
+# $subversion_backupdir = "/var/backups/subversion"
 class mysql::backup {
 
   include mysql::params
