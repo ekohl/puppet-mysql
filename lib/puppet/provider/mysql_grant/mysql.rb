@@ -11,7 +11,7 @@ MYSQL_USER_PRIVS = [ :select_priv, :insert_priv, :update_priv, :delete_priv,
 	:show_db_priv, :super_priv, :create_tmp_table_priv, :lock_tables_priv,
 	:execute_priv, :repl_slave_priv, :repl_client_priv, :create_view_priv,
 	:show_view_priv, :create_routine_priv, :alter_routine_priv,
-	:create_user_priv
+	:create_user_priv, :event_priv, :trigger_priv
 ]
 
 MYSQL_DB_PRIVS = [ :select_priv, :insert_priv, :update_priv, :delete_priv,
@@ -135,7 +135,7 @@ Puppet::Type.type(:mysql_grant).provide(:mysql) do
 			all_privs = MYSQL_USER_PRIVS
 		when :db
 			stmt = 'update db set '
-			where = ' where user="%s" and host="%s"' % [ name[:user], name[:host] ]
+			where = ' where user="%s" and host="%s" and db="%s"' % [ name[:user], name[:host], name[:db] ]
 			all_privs = MYSQL_DB_PRIVS
 		end
 
